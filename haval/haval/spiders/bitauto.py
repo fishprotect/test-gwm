@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
-
 class BitautoSpider(scrapy.Spider):
     name = 'bitauto'
-    allowed_domains = ['www.bitauto.com']
-    start_urls = ['http://www.bitauto.com/']
+    start_urls = ['http://car.bitauto.com/hafu-196/']
 
     def parse(self, response):
+        print(123)
         pass
+        
