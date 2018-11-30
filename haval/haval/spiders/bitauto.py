@@ -5,6 +5,7 @@ class BitautoSpider(scrapy.Spider):
     start_urls = ['http://car.bitauto.com/hafu-196/']
 
     def parse(self, response):
-        print(123)
+        
         pass
+        
         
