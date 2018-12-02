@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy import Spider,Request
 import os
 class BitautoSpider(scrapy.Spider):
     name = 'bitauto'
@@ -11,10 +12,11 @@ class BitautoSpider(scrapy.Spider):
             detail = i.css('ul.p-list li.name')
             name = detail.css('a::text').extract_first()
             next_url = detail.css('a[href]::attr(href)').extract_first()
-            url = response.urljoin(next_url)
-            os.mkdir('./'+name)
-            with open('./'+name+'/'+name+'.txt',w+) as f:
-                f.write(url)
-
-        
-        
+            url = response.urljoin(next_url)+'peizhi/'
+            print(url)
+            yield Request(url,self.detail_parse)
+    def detail_parse(self,response):
+        title = []
+        detail = response.css(' #CarCompareContent > table:nth-child(1) > tbody:nth-child(1)')
+        # titles = .css('tr.trForPic')
+            
