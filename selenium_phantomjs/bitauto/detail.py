@@ -1,6 +1,7 @@
 #
 from selenium import webdriver
 from openpyxl import Workbook
+import re
 class Selenium_PhantomJS:
 
     def __init__(self,url):
@@ -21,7 +22,7 @@ class Selenium_PhantomJS:
         detail_min = self.driver.find_elements_by_css_selector('#CarCompareContent > table > tbody > tr:not(.trForPic) th')
         count_min = 2
         for i in detail_min:
-            print(i.text)
+            # print(i.text)
             self.ws.cell(row=count_min,column=1,value=i.text)
             count_min += 1
     def content(self):
@@ -49,7 +50,9 @@ class Selenium_PhantomJS:
         self.column_title()
         self.content()
         title = self.driver.title 
-        self.wb.save(title+'.xlsx')
+        h = re.findall('[H,M,F]\d\w{,1}\s*\w*',title)[0]
+        self.wb.save('./haval1/'+h+'.xlsx')
+        self.driver.quit()
 
 if __name__ == '__main__':    
     url = 'http://car.bitauto.com/hafuh1/peizhi/'
